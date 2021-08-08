@@ -1,4 +1,4 @@
-package com.bstirbat.personalitytest;
+package com.bstirbat.personalitytest.controller;
 
 import com.bstirbat.personalitytest.entity.Question;
 import com.bstirbat.personalitytest.entity.Variant;
@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/questions")
