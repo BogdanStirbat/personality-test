@@ -12,5 +12,5 @@ public class ExtrovertResultThreshold {
     private Long id;
 
     @Column(name = "threshold")
-    private Integer currentScore;
+    private Integer threshold;
 }
