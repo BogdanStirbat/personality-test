@@ -86,9 +86,7 @@ public class QuizController {
             throw new ValidationFailedException("Cannot answer a finished quiz");
         }
 
-        final Long currentQuestionId = quiz.getCurrentQuestion().getId();
-        Question currentQuestion = questionRepository.findById(quiz.getCurrentQuestion().getId())
-                .orElseThrow(() -> new NotFoundException("Could not find a question with id=" + currentQuestionId));
+        Question currentQuestion = quiz.getCurrentQuestion();
 
         Variant variant = findVariant(currentQuestion.getVariants(), answerQuizModel.getVariant());
         if (variant == null) {
