@@ -13,4 +13,20 @@ public class ExtrovertResultThreshold {
 
     @Column(name = "threshold")
     private Integer threshold;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Integer getThreshold() {
+        return threshold;
+    }
+
+    public void setThreshold(Integer threshold) {
+        this.threshold = threshold;
+    }
 }

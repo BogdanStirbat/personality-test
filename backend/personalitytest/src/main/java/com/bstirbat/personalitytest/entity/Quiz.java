@@ -1,5 +1,7 @@
 package com.bstirbat.personalitytest.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 @Entity
@@ -9,13 +11,15 @@ public class Quiz {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
+    @JsonIgnore
     private Long id;
 
     @Column(name = "quiz_id")
     private String quizId;
 
-    @Column(name = "current_question")
-    private Long currentQuestion;
+    @ManyToOne
+    @JoinColumn(name = "current_question")
+    private Question currentQuestion;
 
     @Column(name = "current_score")
     private Integer currentScore;
@@ -42,11 +46,11 @@ public class Quiz {
         this.quizId = quizId;
     }
 
-    public Long getCurrentQuestion() {
+    public Question getCurrentQuestion() {
         return currentQuestion;
     }
 
-    public void setCurrentQuestion(Long currentQuestion) {
+    public void setCurrentQuestion(Question currentQuestion) {
         this.currentQuestion = currentQuestion;
     }
 
