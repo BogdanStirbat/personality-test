@@ -116,7 +116,7 @@ public class QuestionsControllerTest {
         Question question = new Question();
         question.setId(questionId);
         question.setVariants(Arrays.asList());
-        
+
         Mockito.doReturn(Optional.of(question)).when(questionRepository).findById(questionId);
 
         questionsController.delete(questionId);
