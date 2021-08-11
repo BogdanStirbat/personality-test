@@ -11,6 +11,7 @@ function App() {
   const initialState = {
     quizExists: Boolean(localStorage.getItem("quizId")),
     quizCompleted: Boolean(localStorage.getItem("quizResult")),
+    quizId: localStorage.getItem("quizId"),
     quizResult: localStorage.getItem("quizResult")
   }
 
@@ -18,11 +19,13 @@ function App() {
     switch(action.type) {
       case "quizStart": 
         draft.quizExists = true
+        draft.quizId = action.data
         localStorage.setItem("quizId", action.data)
         return
       case "quizRestart":
         draft.quizExists = false
         draft.quizCompleted = false
+        draft.quizId = ""
         draft.quizResult = ""
         localStorage.removeItem("quizId")
         localStorage.removeItem("quizResult")

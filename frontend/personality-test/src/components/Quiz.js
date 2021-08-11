@@ -1,6 +1,31 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import Axios from 'axios'
+
+import StateContext from '../context/StateContext'
+import DispatchContext from '../context/DispatchContext'
+import axios from 'axios'
 
 function Quiz(props) {
+
+  const state = useContext(StateContext)
+  const dispatch = useContext(DispatchContext)
+
+  async function restartQuiz() {
+
+    try {
+      await Axios.delete("http://localhost:8080/quizzes/" + state.quizId,
+                        {
+                          headers: {
+                            'Content-Type': 'application/json'
+                          }
+                        })
+    } catch(e) {
+      console.log("Error deleting quiz")
+      console.log(e)
+    }
+
+    dispatch({type: "quizRestart"})
+  }
 
   return (
     <div className="centered">
@@ -31,7 +56,7 @@ function Quiz(props) {
         <div className="actions">
           <div className="multiple-buttons">
             <div className="btn primary">Answer</div>
-            <div className="btn secundary">Restart test</div>
+            <div onClick={restartQuiz} className="btn secundary">Restart test</div>
           </div>
         </div>
       </div>
