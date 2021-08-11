@@ -21,6 +21,7 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/quizzes")
+@CrossOrigin(origins = "*")
 public class QuizController {
 
     private static final String INTROVERT = "INTROVERT";
