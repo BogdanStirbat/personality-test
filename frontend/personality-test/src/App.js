@@ -1,13 +1,47 @@
-import './App.css';
+import { useImmerReducer } from "use-immer"
 
-import Home from './components/Home'
-import Result from './components/Result'
-import Quiz from './components/Quiz'
+import './App.css';
+import Main from "./Main";
+import StateContext from "./context/StateContext";
+import DispatchContext from "./context/DispatchContext";
 
 
 function App() {
+
+  const initialState = {
+    quizExists: Boolean(localStorage.getItem("quizId")),
+    quizCompleted: Boolean(localStorage.getItem("quizResult")),
+    quizResult: localStorage.getItem("quizResult")
+  }
+
+  function reducer(draft, action) {
+    switch(action.type) {
+      case "quizStart": 
+        draft.quizExists = true
+        localStorage.setItem("quizId", action.data)
+        return
+      case "quizRestart":
+        draft.quizExists = false
+        draft.quizCompleted = false
+        draft.quizResult = ""
+        localStorage.removeItem("quizId")
+        localStorage.removeItem("quizResult")
+        return
+      case "quizComplete":
+        draft.quizCompleted = true
+        draft.quizResult = action.data
+        localStorage.setItem("quizResult", action.data)
+    }
+  }
+
+  const [state, dispatch] = useImmerReducer(reducer, initialState)
+
   return (
-    <Home />
+    <StateContext.Provider value={state}>
+      <DispatchContext.Provider value={dispatch}>
+        <Main />
+      </DispatchContext.Provider>
+    </StateContext.Provider>
   );
 }
 

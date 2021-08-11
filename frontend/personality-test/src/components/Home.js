@@ -1,7 +1,11 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import Axios from 'axios'
 
+import DispatchContext from '../context/DispatchContext'
+
 function Home(props) {
+
+  const dispatch = useContext(DispatchContext)
 
   async function startQuiz() {
 
@@ -15,7 +19,7 @@ function Home(props) {
                                        })
 
       console.log(response.data)
-      console.log(response.data.quizId)
+      dispatch({type: "quizStart", data: response.data.quizId})
     } catch (e) {
       console.log("Erorr starting quiz.")
       console.log(e)
